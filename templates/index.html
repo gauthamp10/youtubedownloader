@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>YMG!
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}"/> 
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"> </script>   
+ 
+    <style>
+      select {
+          height:2em;
+        width: 18em;
+        float:center;
+      }
+    </style>
+
+
+
+    <script>
+  
+
+      if (!Element.prototype.requestFullscreen) {
+        Element.prototype.requestFullscreen = Element.prototype.mozRequestFullscreen || Element.prototype.webkitRequestFullscreen || Element.prototype.msRequestFullscreen;
+      }
+      // Listen for clicks
+      document.addEventListener('click', function (event) {
+        // Check if clicked element is a video thumbnail
+        var videoId = event.target.getAttribute('data-video');
+        if (!videoId) return;
+        // Create iframe
+        var iframe = document.createElement('div');
+        iframe.innerHTML = '<p>x</p><iframe width="324" height="224" src="https://www.youtube.com/embed/' + videoId + '?rel=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+        var video = iframe.childNodes[1];
+        // Replace the image with the video
+        event.target.parentNode.replaceChild(video, event.target);
+        // Enter fullscreen mode
+        video.requestFullscreen();
+      }
+                                , false);
+    </script>
+  </head>
+  <body style="background-image: radial-gradient( circle 345px at -0.6% 48.6%,  rgba(240,0,0,1) 0%, rgba(0,0,0,1) 100.7% );">
+    <!-- Header -->
+    <header id="header" style="background-image: radial-gradient( circle 345px at -0.6% 48.6%,  rgba(240,0,0,1) 0%, rgba(0,0,0,1) 100.7% );">
+      <h1>
+        <a href="https://ymg007.herokuapp.com">YMG!
+          <span>by Gautham Prakash
+          </span>
+        </a>
+      </h1>
+    </header>
+
+    <div id="main">
+     
+      <section class="wrapper ">
+        <div class="inner">
+          <header class="align-center">
+            <h2>YMG! 
+              <span style="color:#C1C7CD;font-size: 0.7em;font-weight:400;">Yotube Media Grabber
+              </span>
+            </h2>
+            {% if title %}
+     
+            <div class="flex flex-3">
+                
+              <div class="video col">
+                <div class="image fit">
+                 <center>
+                    <p>
+                      <img  data-video="{{thumbnail[23:34]}}" src="{{thumbnail}}" alt=""/>
+                    </p>
+                   <p class="caption" style="
+                   font-size:16px;">
+                  {{title}}
+                </p>
+                    <select name="down_select" id="quality">
+                    {% for vid in data %}
+                    <option value="{{vid.url}}">{{vid.format}} - {{vid.ext}}
+                    </option>
+                    {% endfor %}
+                  </select>
+                <button id="download" onclick="loading()">Download
+                </button>
+                <br>
+                 <a href="https://ymg007.herokuapp.com/">New Download</a>
+                 </center>
+                </div>
+             
+        
+            
+              </div>
+          
+     
+           
+    
+          </header>
+        {% else %}
+        <form method="POST">
+          <p>
+            <input type="text" name="url" placeholder="Search for vidoes or enter video link:" style="color:white !important;" required="required">
+          </p>
+          <input type="submit" name="submit" value="GET MEDIA" onclick="loading()" >
+        </form>
+        {% endif %}
+        <center>
+          <h4 style="color: #C1C7CD;">An opensource video search and downloader
+          </h4>
+        </center>
+        </div>
+      </section>
+    </div>
+     
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="inner">
+
+      <div class="copyright">
+        <ul class="icons">
+          <li>
+            <a href="https://twitter.com/Gauthamprakash1" class="icon fa-twitter">
+              <span class="label">Twitter
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/gautham.prakash1" class="icon fa-facebook">
+              <span class="label">Facebook
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/gauthamp10" class="icon fa-github">
+              <span class="label">Instagram
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/gautham-prakash-207442126/" class="icon fa-linkedin">
+              <span class="label">Snapchat
+              </span>
+            </a>
+          </li>
+        </ul>
+        &copy; Developed by: 
+        <a href="https://gauthamp10.github.io">Gautham Prakash
+        </a>  Website: 
+        <a href="https://gauthamp10.github.io">gauthamp10.github.io
+        </a>  E-mail: 
+        <a href="mailto:gauthamp10@gmail.com">gauthamp10@gmail.com
+        </a>
+      </div>
+
+      </footer>
+          
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}">
+    </script>
+    <script src="{{ url_for('static', filename='js/jquery.scrolly.min.js')}}">
+    </script>
+    <!--<script src="{{ url_for('static', filename='js/skell.min.js') }}"></script>-->
+    <script src="{{ url_for('static', filename='js/util.js') }}">
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}">
+    </script>
+    <script>
+        
+      $(document).ready(function(){
+        $('#download').click(function(){
+          window.location = $('#quality').val();
+        }
+                            );
+      }
+                       );
+
+
+    </script>
+  
+    <script type="text/javascript">  
+      function loading(){
+        Swal.fire({
+          title:'Please Wait while fetching video info...',
+          showCancelButton: false,
+          showConfirmButton: false,
+        }
+                 )
+        Swal.showLoading()
+      }
+    </script>
+
+    </body>
+</html>

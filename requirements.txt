@@ -1,0 +1,5 @@
+youtube_dl==2019.7.2
+requests==2.18.4
+Flask==1.0.3
+beautifulsoup4==4.7.1
+gunicorn==19.9.0
