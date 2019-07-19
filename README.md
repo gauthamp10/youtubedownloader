@@ -1,7 +1,7 @@
 # youtubedownloader (YMG!)
 An opensource youtube downloader and search tool built using flask.
 
-<a href="https://ymg007.herokuapp.com/"><img src="https://github.com/gauthamp10/gauthamp10.github.io/blob/master/img/portfolio/ymg.png"/></a
+<a href="https://ymg007.herokuapp.com/"><img src="https://github.com/gauthamp10/gauthamp10.github.io/blob/master/img/portfolio/ymg.png"/></a>
 
 **See it in action** <a href="https://ymg007.herokuapp.com/">YMG!</a>
 
