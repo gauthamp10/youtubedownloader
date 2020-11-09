@@ -1,10 +1,12 @@
 from flask import Flask
 from flask import request, send_from_directory
 from flask import render_template
-import gunicorn
+import os
 import youtube_dl
 from engine import *
 import re
+
+port = int(os.environ.get("PORT", 5000))
 app = Flask('app')
 
 
@@ -32,6 +34,9 @@ def home_post():
         if vid == None:
             return render_template('404.html'), 404
         return render_template('results.html',vid=vid)
+        
+if __name__ == '__main__':
+    app.run(debug=True,host='0.0.0.0',port=port)
 
 
 
